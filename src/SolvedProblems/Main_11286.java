@@ -1,33 +1,31 @@
-/*
+/* problem 11286
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Template;
+package SolvedProblems;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import static java.lang.System.out;
+import java.util.HashMap;
 
 /**
  * Use this file to submit. UVA only accepts class Main
  */
-class Main {
+class Main_11286 {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     public static void main(String[] args) throws IOException {
         BufferedOutputStream output;
@@ -43,15 +41,46 @@ class Main {
         }
 
         String str;
+        int[] course = new int[5];
+        HashMap<String, Integer> combinationCount = new HashMap<String, Integer>();
         while(input.hasNext()){
-            str = input.nextLine();
-            StringTokenizer stringTokenizer = new StringTokenizer(str);
-            System.out.println(str);
-            //int tapeCapacity = Integer.parseInt(stringTokenizer.nextToken());
-           // sb.append("\n");
+            combinationCount.clear();
+            int maxPopularity = Integer.MIN_VALUE;
+            int studentCount = input.nextInt();
+            if(studentCount == 0){
+                break;
+            }//end if
+            for(int i = 0; i < studentCount; i++){
+                for(int courseNum = 0; courseNum < 5; courseNum++){
+                    course[courseNum] = input.nextInt();
+                    //System.out.print(course[courseNum] + " ");
+                }//end for
+                Arrays.sort(course);
+                String courseStr = "";
+                for(int courseNum : course){
+                    courseStr += courseNum;
+                    //System.out.print(course + " ");
+                }//end for
+                //System.out.println(courseStr);
+                int popularity = 1;
+                if(combinationCount.containsKey(courseStr)){
+                    popularity = combinationCount.get(courseStr) + 1;
+                }//end if
+                combinationCount.put(courseStr, popularity);
+                if(popularity > maxPopularity){
+                    maxPopularity = popularity;
+                }//end if
+            }//end for
+            int totalStudentTakingPopularCourse = 0;
+            for(int popularity : combinationCount.values()){
+                if(popularity == maxPopularity){
+                    totalStudentTakingPopularCourse += popularity;
+                }
+            }//end for
+            out.println(totalStudentTakingPopularCourse);            
 
-        }
-
+        }//end while
+        out.println();
         output.write(sb.toString().getBytes());
         output.flush();
         output.close();

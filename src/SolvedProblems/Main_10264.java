@@ -1,8 +1,8 @@
-/*
+/* 10264 the most potent corner
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Template;
+package SolvedProblems;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -21,13 +21,15 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import static java.lang.System.out;
+import java.util.BitSet;
+import java.util.HashMap;
 
 /**
  * Use this file to submit. UVA only accepts class Main
  */
-class Main {
+class Main_10264 {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     public static void main(String[] args) throws IOException {
         BufferedOutputStream output;
@@ -37,20 +39,58 @@ class Main {
         if (DEBUG) {
             output = new BufferedOutputStream(System.out);
             input = new Scanner(new File("input.txt"));;
-        }else{
+        } else {
             output = new BufferedOutputStream(System.out);
             input = new Scanner(System.in);
         }
 
         String str;
-        while(input.hasNext()){
-            str = input.nextLine();
-            StringTokenizer stringTokenizer = new StringTokenizer(str);
-            System.out.println(str);
-            //int tapeCapacity = Integer.parseInt(stringTokenizer.nextToken());
-           // sb.append("\n");
+        HashMap<BitSet, Integer> weightMap = new HashMap<BitSet, Integer>();
+        HashMap<BitSet, Integer> potencyMap = new HashMap<BitSet, Integer>();
+        //while(input.hasNext() == true){
+        while (input.hasNext() == true) {
+            weightMap.clear();
+            potencyMap.clear();
+            //str = input.nextLine();
+            int n = input.nextInt();
+            int totalCount = (int) Math.pow(2, n);
+            for (int number = 0; number < totalCount; number++) {
+                int weight = input.nextInt();
+                BitSet b = BitSet.valueOf(new long[]{number});
+                weightMap.put(b, weight);
+                //System.out.println(b.toString());
+            }//end for
 
-        }
+            //get the potency
+            for (BitSet b : weightMap.keySet()) {
+                int sum = 0;
+                for (int i = 0; i < n; i++) {
+                    //flip to get neighbor
+                    b.flip(i);
+                    sum += weightMap.get(b);
+                    //flipping back to originial 
+                    b.flip(i);
+                }
+                potencyMap.put(b, sum);
+            }//end for
+
+            //get max sum
+            int maxSum = Integer.MIN_VALUE;
+            for (BitSet b : potencyMap.keySet()) {
+                int myPotency = potencyMap.get(b);
+
+                for (int i = 0; i < n; i++) {
+                    b.flip(i);
+                    int neighborPotency = potencyMap.get(b);
+                    if(myPotency + neighborPotency > maxSum){
+                        maxSum = myPotency + neighborPotency;
+                    }//end if
+                    b.flip(i);
+                }//end for
+            }//end for
+            
+            System.out.println(maxSum);
+        }//end of while
 
         output.write(sb.toString().getBytes());
         output.flush();
@@ -219,23 +259,20 @@ class Main {
  output.write(stringBuilder.toString().getBytes());
  */
 //or we can use the below utilitiy classes: 
-
-/** 
-* Various utility class for Fast I/O in java.  
-* Readings: http://www.codechef.com/wiki/java#IO_in_Java 
-* BufferedInputStream > BufferedReader > Scanner  
-* 
-* USAGE: 
-* InputReader in 		= new InputReader(System.in);
-* OutputWriter out	=	new OutputWriter(System.out);
-* 
-* int i = in.readInt(); //read int
-* String s = in.readString(); //read string
-* int[] x = IOUtils.readIntArray(in,N); //read int array of size N
-* String s = in.readLine() // read a line ( to be used with tokenizer );
-* 
-* out.printLine("X");
-*  
-* out.flush(); // flush output
-* out.close(); // remember to close the outputstream, at the end (might be able to not do this to save some time) 
-*/
+/**
+ * Various utility class for Fast I/O in java. Readings:
+ * http://www.codechef.com/wiki/java#IO_in_Java BufferedInputStream >
+ * BufferedReader > Scanner
+ *
+ * USAGE: InputReader in = new InputReader(System.in); OutputWriter out	=	new
+ * OutputWriter(System.out);
+ *
+ * int i = in.readInt(); //read int String s = in.readString(); //read string
+ * int[] x = IOUtils.readIntArray(in,N); //read int array of size N String s =
+ * in.readLine() // read a line ( to be used with tokenizer );
+ *
+ * out.printLine("X");
+ *
+ * out.flush(); // flush output out.close(); // remember to close the
+ * outputstream, at the end (might be able to not do this to save some time)
+ */

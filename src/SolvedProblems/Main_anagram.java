@@ -1,4 +1,5 @@
-package ProblemInTrial;
+//was not accepted due to the time limit
+package SolvedProblems;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
 
-class Main {
+class Main_anagram {
     static Scanner in = new Scanner(System.in);
 
     static PrintWriter out = new PrintWriter(System.out, true);

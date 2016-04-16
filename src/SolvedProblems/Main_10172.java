@@ -26,7 +26,7 @@ import java.math.BigInteger;
 /**
  * Use this file to submit. UVA only accepts class Main
  */
-public class Main {
+public class Main_10172 {
 
     public static final boolean DEBUG = false;
 

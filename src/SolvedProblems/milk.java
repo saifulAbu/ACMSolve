@@ -1,3 +1,5 @@
+package SolvedProblems;
+
 //comment out package line when submitting
 //package Template;
 /* 
