@@ -14,6 +14,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -26,6 +28,46 @@ public class Main_414 {
 
     public static final boolean DEBUG = true;
 
+    public static int getNumberofLines(Scanner file) {
+        int line = file.nextInt();
+        return line;
+    }
+
+    public static int countSpaces(String row) {
+        int count = 0;
+        for (char ch : row.toCharArray()) {
+            if (ch == ' ') {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int[] readImage(Scanner file, int lineCount) {
+        int[] spaces = new int[lineCount]; //use static array
+        for (int i = 0; i < lineCount; i++) {
+            String str = file.nextLine();
+            spaces[i] = countSpaces(str);
+        }
+        return spaces;
+    }
+    
+    private static int findRemainingSpace(int[] spaces, int lineCount) {
+        int min = Integer.MAX_VALUE;
+        for(int val : spaces){
+            if(val < min){
+                min = val;
+            }
+        }
+        
+        int remainingSpaces = 0;
+        for(int val : spaces){
+            remainingSpaces += (val - min);
+        }
+        
+        return remainingSpaces;
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedOutputStream output;
         StringBuilder sb = new StringBuilder(2000); //assume initial size of 2000 chars
@@ -34,20 +76,21 @@ public class Main_414 {
         if (DEBUG) {
             output = new BufferedOutputStream(System.out);
             input = new Scanner(new File("input.txt"));;
-        }else{
+        } else {
             output = new BufferedOutputStream(System.out);
             input = new Scanner(System.in);
         }
 
-        String str;
-        while(input.hasNext()){
-            str = input.nextLine();
-            StringTokenizer stringTokenizer = new StringTokenizer(str);
-            System.out.println(str);
-            //int tapeCapacity = Integer.parseInt(stringTokenizer.nextToken());
-           // sb.append("\n");
-
+        ///
+        int lineCount = getNumberofLines(input);
+        while (lineCount != 0) {
+            String str = input.nextLine();
+            int[] spaces = readImage(input, lineCount);
+            lineCount = getNumberofLines(input);
+            int remainingSpace = findRemainingSpace(spaces, lineCount);
+            System.out.println(remainingSpace);
         }
+        ///
 
         output.write(sb.toString().getBytes());
         output.flush();
