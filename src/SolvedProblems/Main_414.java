@@ -26,7 +26,7 @@ import java.util.StringTokenizer;
  */
 public class Main_414 {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     public static int getNumberofLines(Scanner file) {
         int line = file.nextInt();
@@ -81,16 +81,15 @@ public class Main_414 {
             input = new Scanner(System.in);
         }
 
-        ///
         int lineCount = getNumberofLines(input);
         while (lineCount != 0) {
             String str = input.nextLine();
             int[] spaces = readImage(input, lineCount);
             lineCount = getNumberofLines(input);
             int remainingSpace = findRemainingSpace(spaces, lineCount);
-            System.out.println(remainingSpace);
+            sb.append(remainingSpace);
+            sb.append("\n");
         }
-        ///
 
         output.write(sb.toString().getBytes());
         output.flush();
