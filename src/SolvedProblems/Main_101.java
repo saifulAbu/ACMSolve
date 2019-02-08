@@ -1,10 +1,7 @@
-/* problem 10172
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package SolvedProblems;
-
-import Template.*;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,9 +19,6 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import static java.lang.System.out;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 /**
  * Use this file to submit. UVA only accepts class Main
@@ -35,96 +29,80 @@ class Main_101 {
 
     public static void main(String[] args) throws IOException {
         BufferedOutputStream output;
-        StringBuilder sb = new StringBuilder(2000); //assume initial size of 2000 chars
+        //StringBuilder sb = new StringBuilder(2000); //assume initial size of 2000 chars
         //InputReader input;
         Scanner input;
         if (DEBUG) {
             output = new BufferedOutputStream(System.out);
             input = new Scanner(new File("input.txt"));;
-        } else {
+        }else{
             output = new BufferedOutputStream(System.out);
             input = new Scanner(System.in);
         }
-
-        String str;
-        Stack stack = new Stack();
-        while (input.hasNext()) {
-            int cases = input.nextInt();
-            for (int curCase = 0; curCase < cases; curCase++) {
-                int n = input.nextInt();
-                int stackCapacity = input.nextInt();
-                int queueCapacity = input.nextInt();
-                int curCountry = 0;
-                boolean allQEmpty = true;
-                int totalTime = 0;
-                Queue<Integer>[] queue = new Queue[n];
-                stack.removeAllElements();
-                //load all the queues
-                for (int i = 0; i < n; i++) {
-                    queue[i] = new LinkedList<Integer>();
-                    int itemCount = input.nextInt();
-                    if (itemCount > 0) {
-                        allQEmpty = false;
-                    }//end if
-                    for (int itemIndex = 0; itemIndex < itemCount; itemIndex++) {
-                        queue[i].add(input.nextInt());
-                    }//end for
-                }//end of for
-
-//                //check if all the queues are filled properly or not
-//                for(int i = 0; i < n; i++){
-//                    while(!queue[i].isEmpty()){
-//                        System.out.print(queue[i].poll() + " ");
-//                    }
-//                    System.out.println();
-//                }//end for
-                while (!allQEmpty) {
-                    Queue q = queue[curCountry];
-
-                    //peek the top to see if some cargo can be put on platform A
-                    while ((!stack.isEmpty())&&(Integer) stack.peek() == (curCountry + 1)) {
-                        stack.pop();
-                        totalTime++;
-                    }//end while
-                    //unload curcountry
-                    while (!stack.isEmpty() && (q.size() < queueCapacity)) {
-                        int top = (Integer) stack.pop();
-                        totalTime++;
-                        if (top != (curCountry + 1)) {
-                            //load to B
-                            q.add(top);
-                        }//end if else
-                    }//end while
-
-                    //load from B to Stack
-                    while (!q.isEmpty() && (stack.size() < stackCapacity)) {
-                        stack.push(q.poll());
-                        totalTime++;
-                    }//end while
-
-                    curCountry = (curCountry + 1) % n;
-                    allQEmpty = true;
-                    for (int i = 0; i < n; i++) {
-                        if (!queue[i].isEmpty()) {
-                            allQEmpty = false;
-                            break;
-                        }//end if
-                    }//end for
-                    if(allQEmpty){
-                        break;
-                    }
-                    totalTime += 2;
-                }//end while
-                System.out.println(totalTime);
-            }//end for
-            break;
-        }//end while
+        
+        int blockCount = input.nextInt();
+        println("num blocks " + blockCount);
+        while(input.hasNext()){
+            String firstPart = input.next();
+            if(firstPart.equals("quit")){
+                println("quit");
+                break;
+            }
+            
+            int movingBlock = input.nextInt();
+            String secondPart = input.next();
+            int staticBlock = input.nextInt();
+            
+            if(firstPart.equals("move")){
+                if(secondPart.equals("onto")){
+                    moveOnto(movingBlock, staticBlock);
+                }else{
+                    moveOver(movingBlock, staticBlock);
+                }
+            }else{
+                if(secondPart.equals("onto")){
+                    pileOnto(movingBlock, staticBlock);
+                }else{
+                    pileOver(movingBlock, staticBlock);
+                }
+            }
+        }
+        
+        StringBuilder sb = printBlockWorldState();
 
         output.write(sb.toString().getBytes());
         output.flush();
         output.close();
 
     }// end of static void main
+
+    private static void println(String string) {
+        System.out.println(string);
+    }
+
+    private static void moveOnto(int movingBlock, int staticBlock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void moveOver(int movingBlock, int staticBlock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void pileOnto(int movingBlock, int staticBlock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void pileOver(int movingBlock, int staticBlock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static StringBuilder printBlockWorldState() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**stuffs to solve the problem*/
+    
+    /** stuffs to solve the problem end **/
 
     static class InputReader {
 
@@ -287,20 +265,23 @@ class Main_101 {
  output.write(stringBuilder.toString().getBytes());
  */
 //or we can use the below utilitiy classes: 
-/**
- * Various utility class for Fast I/O in java. Readings:
- * http://www.codechef.com/wiki/java#IO_in_Java BufferedInputStream >
- * BufferedReader > Scanner
- *
- * USAGE: InputReader in = new InputReader(System.in); OutputWriter out	=	new
- * OutputWriter(System.out);
- *
- * int i = in.readInt(); //read int String s = in.readString(); //read string
- * int[] x = IOUtils.readIntArray(in,N); //read int array of size N String s =
- * in.readLine() // read a line ( to be used with tokenizer );
- *
- * out.printLine("X");
- *
- * out.flush(); // flush output out.close(); // remember to close the
- * outputstream, at the end (might be able to not do this to save some time)
- */
+
+/** 
+* Various utility class for Fast I/O in java.  
+* Readings: http://www.codechef.com/wiki/java#IO_in_Java 
+* BufferedInputStream > BufferedReader > Scanner  
+* 
+* USAGE: 
+* InputReader in 		= new InputReader(System.in);
+* OutputWriter out	=	new OutputWriter(System.out);
+* 
+* int i = in.readInt(); //read int
+* String s = in.readString(); //read string
+* int[] x = IOUtils.readIntArray(in,N); //read int array of size N
+* String s = in.readLine() // read a line ( to be used with tokenizer );
+* 
+* out.printLine("X");
+*  
+* out.flush(); // flush output
+* out.close(); // remember to close the outputstream, at the end (might be able to not do this to save some time) 
+*/
