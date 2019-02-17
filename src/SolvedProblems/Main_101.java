@@ -26,6 +26,25 @@ import static java.lang.System.out;
 class Main_101 {
 
     public static final boolean DEBUG = true;
+    
+    public static int[] count;
+    public static int[][] block;
+    public static int[] x;
+    public static int[] y;
+    
+    public static void init(int size){
+        count = new int[size];
+        block = new int[size][size];
+        x = new int[size];
+        y = new int[size];
+        
+        for(int i = 0; i < size; i++){
+            block[i][0] = i;
+            x[i] = i;
+            y[i] = 0;
+            count[i] = 1;
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         BufferedOutputStream output;
@@ -41,6 +60,7 @@ class Main_101 {
         }
         
         int blockCount = input.nextInt();
+        init(blockCount);
         println("num blocks " + blockCount);
         while(input.hasNext()){
             String firstPart = input.next();
@@ -79,13 +99,56 @@ class Main_101 {
     private static void println(String string) {
         System.out.println(string);
     }
+    
+    private static void returnBlock(int i, int j){
+        int blck = block[i][j];
+        
+        count[i]--;
+        count[blck]++;
+        
+        block[i][j] = -1;
+        block[blck][0] = blck;
+        
+        x[blck] = blck;
+        y[blck] = 0;
+    }
+    
+    private static void returnAllBlocksFrom(int blck){
+        int block_x = x[blck];
+        int block_y = y[blck];
+        
+        for(int i = block_x; i < count[blck]; i++){
+            returnBlock(i, block_y);
+        }
+    }
+    
+    private static boolean onSameColumn(int block1, int block2){
+        return (x[block1] == x[block2]);
+    }
 
     private static void moveOnto(int movingBlock, int staticBlock) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(onSameColumn(movingBlock, staticBlock)){
+            return;
+        }
+        //return all blocks over static block
+        returnAllBlocksFrom(staticBlock);
+        //move moving block over statick block
+        moveOver(movingBlock, staticBlock);
     }
 
     private static void moveOver(int movingBlock, int staticBlock) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(onSameColumn(staticBlock, movingBlock)){
+            return;
+        }
+        int m_x = x[movingBlock];
+        int m_y = y[movingBlock];
+        int s_x = x[staticBlock];
+        
+        block[s_x][count[s_x]] = movingBlock;
+        block[m_x][m_y] = -1;
+        
+        count[m_x]--;
+        count[s_x]++;
     }
 
     private static void pileOnto(int movingBlock, int staticBlock) {
