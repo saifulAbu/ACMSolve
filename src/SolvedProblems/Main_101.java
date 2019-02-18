@@ -160,7 +160,16 @@ class Main_101 {
     }
 
     private static StringBuilder printBlockWorldState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder(2000); //assume initial size of 2000 chars
+        for(int i = 0; i < block.length; i++){
+            String str = i + ": ";
+            for(int j = 0; j < count[i]; j++){
+                str = str + block[i][j] + " ";
+            }
+            str = str + "\n";
+            sb.append(str);
+        }
+        return sb;
     }
     
     /**stuffs to solve the problem*/
