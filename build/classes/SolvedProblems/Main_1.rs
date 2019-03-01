@@ -1,10 +1,10 @@
 SolvedProblems.Main$InputReader$SpaceCharFilter
-ProblemInTrial.Main$InputReader
-ProblemInTrial.Main$IOUtils
+SolvedProblems.Main_101$IOUtils
+SolvedProblems.Main_101$InputReader$SpaceCharFilter
+SolvedProblems.Main_101$InputReader
 SolvedProblems.Main$IOUtils
 SolvedProblems.Main$OutputWriter
 SolvedProblems.Main$InputReader
-ProblemInTrial.Main
+SolvedProblems.Main_101$OutputWriter
 SolvedProblems.Main
-ProblemInTrial.Main$OutputWriter
-ProblemInTrial.Main$InputReader$SpaceCharFilter
+SolvedProblems.Main_101

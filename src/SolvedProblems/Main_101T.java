@@ -1,3 +1,5 @@
+package SolvedProblems;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -23,7 +25,7 @@ import static java.lang.System.out;
 /**
  * Use this file to submit. UVA only accepts class Main
  */
-class Main_101 {
+public class Main_101T {
 
     public static final boolean DEBUG = true;
     
@@ -102,7 +104,7 @@ class Main_101 {
     
     private static void returnBlock(int i, int j){
         int blck = block[i][j];
-        
+        println("moving block " + blck);
         count[i]--;
         count[blck]++;
         
@@ -114,11 +116,12 @@ class Main_101 {
     }
     
     private static void returnAllBlocksFrom(int blck){
+        println("returning all blocks from " + blck);
         int block_x = x[blck];
         int block_y = y[blck];
-        
-        for(int i = block_x; i < count[blck]; i++){
-            returnBlock(i, block_y);
+        int numBlockOver = count[block_x] - block_y - 1;
+        for(int i = 1; i <= numBlockOver; i++){
+            returnBlock(block_x, block_y + i);
         }
     }
     
@@ -130,9 +133,7 @@ class Main_101 {
         if(onSameColumn(movingBlock, staticBlock)){
             return;
         }
-        //return all blocks over static block
         returnAllBlocksFrom(staticBlock);
-        //move moving block over statick block
         moveOver(movingBlock, staticBlock);
     }
 
@@ -140,6 +141,9 @@ class Main_101 {
         if(onSameColumn(staticBlock, movingBlock)){
             return;
         }
+        
+        returnAllBlocksFrom(movingBlock);
+        
         int m_x = x[movingBlock];
         int m_y = y[movingBlock];
         int s_x = x[staticBlock];
@@ -147,12 +151,31 @@ class Main_101 {
         block[s_x][count[s_x]] = movingBlock;
         block[m_x][m_y] = -1;
         
+        x[movingBlock] = s_x;
+        y[movingBlock] = count[s_x];
+        
         count[m_x]--;
         count[s_x]++;
     }
+    
+    private static void shiftblock(int movingBlock, int staticBlock){
+        return;
+    }
+    
+    private static void shiftBlocks(int movingBlock, int staticBlock){
+        //numblocksOver = numBlocks(movingBlock)
+        //m_y = moving block's y
+        //m_x = moving block's x
+        //count[m_x] = count[m_x] - numblocksover - 1
+        //for i = 0; i <= numBlocksover; i++
+        // shift block m_x, m_y + i to static block
+        return;
+    }
+    
 
     private static void pileOnto(int movingBlock, int staticBlock) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        returnAllBlocksFrom(staticBlock);
+        shiftBlocks(movingBlock, staticBlock);
     }
 
     private static void pileOver(int movingBlock, int staticBlock) {
