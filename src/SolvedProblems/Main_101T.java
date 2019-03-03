@@ -115,11 +115,18 @@ public class Main_101T {
         y[blck] = 0;
     }
     
+    private static int numBlockOver(int blck){
+        int block_x = x[blck];
+        int block_y = y[blck];
+        int numBlockOver = count[block_x] - block_y - 1;
+        return numBlockOver;
+    }
+    
     private static void returnAllBlocksFrom(int blck){
         println("returning all blocks from " + blck);
         int block_x = x[blck];
         int block_y = y[blck];
-        int numBlockOver = count[block_x] - block_y - 1;
+        int numBlockOver = numBlockOver(blck);
         for(int i = 1; i <= numBlockOver; i++){
             returnBlock(block_x, block_y + i);
         }
@@ -158,17 +165,29 @@ public class Main_101T {
         count[s_x]++;
     }
     
-    private static void shiftblock(int movingBlock, int staticBlock){
+    private static void shiftblock(int movingBlock, int new_x){
+        int old_x = x[movingBlock];
+        int old_y = y[movingBlock];
+        
+        block[new_x][count[new_x]] = movingBlock;
+        block[old_x][old_y] = -1;
+        
+        count[old_x] = count[old_x] - 1;
+        count[new_x] = count[new_x] + 1;
         return;
     }
     
     private static void shiftBlocks(int movingBlock, int staticBlock){
-        //numblocksOver = numBlocks(movingBlock)
+        int numblocksOver = numBlockOver(movingBlock);
         //m_y = moving block's y
+        int m_y = y[movingBlock];
         //m_x = moving block's x
-        //count[m_x] = count[m_x] - numblocksover - 1
+        int m_x = x[movingBlock];
         //for i = 0; i <= numBlocksover; i++
+        for(int i = 0; i <= numblocksOver; i++){
         // shift block m_x, m_y + i to static block
+            shiftblock(block[m_x][m_y + i], x[staticBlock]);
+        }
         return;
     }
     
@@ -179,7 +198,8 @@ public class Main_101T {
     }
 
     private static void pileOver(int movingBlock, int staticBlock) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //top_block = top_most_block(x[staticBlock])
+        //shiftBlocks(movingBlock, staticBlock);
     }
 
     private static StringBuilder printBlockWorldState() {
