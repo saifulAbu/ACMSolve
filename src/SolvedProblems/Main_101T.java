@@ -41,6 +41,7 @@ public class Main_101T {
         y = new int[size];
         
         for(int i = 0; i < size; i++){
+            Arrays.fill(block[i], -1);
             block[i][0] = i;
             x[i] = i;
             y[i] = 0;
@@ -169,11 +170,17 @@ public class Main_101T {
         int old_x = x[movingBlock];
         int old_y = y[movingBlock];
         
-        block[new_x][count[new_x]] = movingBlock;
+        int new_y = count[new_x];
+        
+        block[new_x][new_y] = movingBlock;
         block[old_x][old_y] = -1;
         
         count[old_x] = count[old_x] - 1;
         count[new_x] = count[new_x] + 1;
+        
+        x[movingBlock] = new_x;
+        y[movingBlock] = new_y;
+        
         return;
     }
     
@@ -199,7 +206,10 @@ public class Main_101T {
 
     private static void pileOver(int movingBlock, int staticBlock) {
         //top_block = top_most_block(x[staticBlock])
-        //shiftBlocks(movingBlock, staticBlock);
+        int top_block_x = x[staticBlock];
+        int top_block_y = count[staticBlock] - 1;
+        int top_block = block[top_block_x][top_block_y];
+        shiftBlocks(movingBlock, top_block);
     }
 
     private static StringBuilder printBlockWorldState() {
