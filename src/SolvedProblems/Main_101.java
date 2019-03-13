@@ -25,7 +25,7 @@ import static java.lang.System.out;
 /**
  * Use this file to submit. UVA only accepts class Main
  */
-public class Main_101T {
+public class Main_101 {
 
     public static final boolean DEBUG = true;
     
@@ -64,11 +64,11 @@ public class Main_101T {
         
         int blockCount = input.nextInt();
         init(blockCount);
-        println("num blocks " + blockCount);
+        //println("num blocks " + blockCount);
         while(input.hasNext()){
             String firstPart = input.next();
             if(firstPart.equals("quit")){
-                println("quit");
+                //println("quit");
                 break;
             }
             
@@ -105,7 +105,7 @@ public class Main_101T {
     
     private static void returnBlock(int i, int j){
         int blck = block[i][j];
-        println("moving block " + blck);
+        //("moving block " + blck);
         count[i]--;
         count[blck]++;
         
@@ -124,7 +124,7 @@ public class Main_101T {
     }
     
     private static void returnAllBlocksFrom(int blck){
-        println("returning all blocks from " + blck);
+        //println("returning all blocks from " + blck);
         int block_x = x[blck];
         int block_y = y[blck];
         int numBlockOver = numBlockOver(blck);
@@ -167,6 +167,9 @@ public class Main_101T {
     }
     
     private static void shiftblock(int movingBlock, int new_x){
+        if(x[movingBlock] == new_x){
+            return;
+        }
         int old_x = x[movingBlock];
         int old_y = y[movingBlock];
         
@@ -185,6 +188,9 @@ public class Main_101T {
     }
     
     private static void shiftBlocks(int movingBlock, int staticBlock){
+        if(onSameColumn(movingBlock, staticBlock)){
+            return;
+        }
         int numblocksOver = numBlockOver(movingBlock);
         //m_y = moving block's y
         int m_y = y[movingBlock];
@@ -200,11 +206,17 @@ public class Main_101T {
     
 
     private static void pileOnto(int movingBlock, int staticBlock) {
+        if(onSameColumn(movingBlock, staticBlock)){
+            return;
+        }
         returnAllBlocksFrom(staticBlock);
         shiftBlocks(movingBlock, staticBlock);
     }
 
     private static void pileOver(int movingBlock, int staticBlock) {
+        if(onSameColumn(movingBlock, staticBlock)){
+            return;
+        }
         //top_block = top_most_block(x[staticBlock])
         int top_block_x = x[staticBlock];
         int top_block_y = count[staticBlock] - 1;

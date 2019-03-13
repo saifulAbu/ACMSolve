@@ -29,7 +29,7 @@ import java.util.Stack;
 /**
  * Use this file to submit. UVA only accepts class Main
  */
-class Main_101 {
+public class Main_1 {
 
     public static final boolean DEBUG = true;
 
