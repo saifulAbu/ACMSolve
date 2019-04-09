@@ -1,0 +1,7 @@
+594
+https://uhunt.onlinejudge.org/id/142217
+https://uva.onlinejudge.org/external/5/594.pdf
+https://ncalculators.com/digital-computation/1s-2s-complement-calculator.htm
+https://www.mathsisfun.com/binary-decimal-hexadecimal-converter.html
+https://docs.oracle.com/javase/7/docs/api/java/util/BitSet.html
+

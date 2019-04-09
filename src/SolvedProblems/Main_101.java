@@ -27,7 +27,7 @@ import static java.lang.System.out;
  */
 public class Main_101 {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     
     public static int[] count;
     public static int[][] block;

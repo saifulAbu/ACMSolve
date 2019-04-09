@@ -9,31 +9,24 @@ package SolvedProblems;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import static SolvedProblems.Test_146.suffixLongestDecreasingSequenceStartIndex;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.StringTokenizer;
-
-import static java.lang.System.out;
 
 /**
  * Use this file to submit. UVA only accepts class Main
  */
 public class Main_146 {
 
-  public static final boolean DEBUG = true;
+  public static final boolean DEBUG = false;
 
   public static void main(String[] args) throws IOException {
     BufferedOutputStream output;
