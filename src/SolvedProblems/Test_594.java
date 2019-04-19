@@ -82,10 +82,8 @@ public class Test_594 {
     return String.valueOf(numArr);
   }
   
-  
-  
   public static String twosCompliment(String str){
-    return "";
+    return addOne(onesCompliment(str));
   }
   
   public static void pn(int num){
