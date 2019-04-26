@@ -12,14 +12,33 @@ package SolvedProblems;
 public class Test_594 {
   
   public static void main(String args[]){
-    //pn(decimalTo32BitBinary(0));
-    //pn(decimalTo32BitBinary(10));
-    //pn(decimalTo32BitBinary(7));
-    //pn(decimalTo32BitBinary(8));
-    pn(addOne("01111111111111111111111111111111"));
+    int num = -123456789;
+    pn(processNumber(num));
     
-    //pn(binary32BitToDecimal(decimalTo32BitBinary(10)) + "");
-    //pn(onesCompliment(unSigneddecimalTo32BitBinary(0)));
+  }
+  
+  public static int processNumber(int num){
+    String numStr = unSigneddecimalTo32BitBinary(Math.abs(num));
+    if(num < 0){
+      numStr = twosCompliment(numStr);
+    }
+    String endConverted = changeEndian(numStr);
+    return unSignedbinary32BitToDecimal(endConverted);
+  }
+  
+  public static String changeEndian(String num){
+    String result = "";
+    int beginIndex = 24;
+    for(int i = 0; i < 4; i++){
+      for(int j = 0; j < 8; j++){
+        int nextIndex = beginIndex + j;
+        //p(nextIndex + " ");
+        result = result + num.charAt(nextIndex);
+      }
+      //pn("");
+      beginIndex -= 8;
+    }
+    return result;
   }
   
   public static String unSigneddecimalTo32BitBinary(int num){
