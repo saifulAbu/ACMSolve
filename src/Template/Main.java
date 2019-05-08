@@ -36,7 +36,7 @@ class Main {
         Scanner input;
         if (DEBUG) {
             output = new BufferedOutputStream(System.out);
-            input = new Scanner(new File("input.txt"));;
+            input = new Scanner(new File("input/uvaXXXX.txt"));;
         }else{
             output = new BufferedOutputStream(System.out);
             input = new Scanner(System.in);
