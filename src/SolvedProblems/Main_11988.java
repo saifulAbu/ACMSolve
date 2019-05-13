@@ -26,7 +26,7 @@ import static java.lang.System.out;
 /**
  * Use this file to submit. UVA only accepts class Main
  */
-class Test_11988 {
+class Main_11988 {
 
     public static final boolean DEBUG = true;
 
@@ -37,7 +37,7 @@ class Test_11988 {
         Scanner input;
         if (DEBUG) {
             output = new BufferedOutputStream(System.out);
-            input = new Scanner(new File("input.txt"));;
+            input = new Scanner(new File("input/uva11988.txt"));;
         }else{
             output = new BufferedOutputStream(System.out);
             input = new Scanner(System.in);
