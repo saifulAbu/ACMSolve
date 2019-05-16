@@ -44,4 +44,16 @@ public class java {
     System.out.println(s);
   }
   
+  static int getNextIndex(char ch, int curIndex, int size){
+    int index = curIndex + 1;
+    if(ch == '['){
+      index = 0;
+    }else if( ch == ']'){
+      index = size;
+    }
+    return index;
+  }
+  
+  
+  
 }
