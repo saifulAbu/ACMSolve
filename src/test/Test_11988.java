@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Test_11988;
+package test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,33 +12,29 @@ import java.util.List;
  *
  * @author sid
  */
-public class java {
+public class Test_11988 {
   
   //keep an index, where to insert to the list
   //whent you get [, reset the insert pointer to 0
   //when you get ], reset the insert pointer to list.size()
   //for everything else, insert the character at pointer, increment the pointer
-  int getIndex(char currentChar, int curIndex, int listSize){
-    return 0;
-  }
   
   public static void main(String args[]){
     testLL();
   }
   
   static void testLL(){
-    List l = new LinkedList<Integer>();
-    l.add(0, 0);
-    l.add(1, 1);
-    l.add(2, 3);
-    l.add(2, 2);
-    l.add(0, -1);
+    List l = new LinkedList<Character>();
+    l.add(0, '0');
+    l.add(1, '1');
+    l.add(2, '3');
+    l.add(2, '2');
     pLL(l);
   }
   
-  static void pLL(List<Integer> l){
+  static void pLL(List<Character> l){
     String s = "";
-    for(int i : l){
+    for(char i : l){
       s = s + " " + i;
     }
     System.out.println(s);
@@ -52,8 +48,5 @@ public class java {
       index = size;
     }
     return index;
-  }
-  
-  
-  
+  } 
 }
