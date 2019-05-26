@@ -30,7 +30,7 @@ import java.util.List;
  */
 class Main_11988 {
 
-  public static final boolean DEBUG = true;
+  public static final boolean DEBUG = false;
 
   public static void main(String[] args) throws IOException {
     BufferedOutputStream output;
@@ -54,7 +54,6 @@ class Main_11988 {
       int curIndex = -1;
       for(char ch : inputArr){
         curIndex = getNextIndex(ch, curIndex, finalText.size());
-        System.out.println(ch + " : " + curIndex);
         if(ch == '[' || ch == ']'){
           continue;
         } else {
@@ -86,7 +85,7 @@ class Main_11988 {
     if (ch == '[') {
       index = -1;
     } else if (ch == ']') {
-      index = size;
+      index = size-1;
     }
     return index;
   }
